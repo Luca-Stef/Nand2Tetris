@@ -1,0 +1,11 @@
+CHIP count {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+    Register(in=false, load=true, out=mid);
+
+    Inc16(in=mid, out=mid2);
+
+    DFF(in=mid2, out=mid2);
+}
