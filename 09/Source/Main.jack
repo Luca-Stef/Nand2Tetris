@@ -1,0 +1,9 @@
+class Main {
+    function void main() {
+        var Launch launch;
+        let launch = Launch.new();
+        do launch.run();
+        do launch.dispose();
+        return;
+    }
+}

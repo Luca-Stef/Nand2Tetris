@@ -1,0 +1,99 @@
+/** Implements a graphical DVD */
+class Rectangle {
+
+    field int x0, y0, x1, y1;  
+    field int length;
+    field int height;
+
+    /** Constructs a new rectangle */
+    constructor Rectangle new() {
+        let length = 32;
+        let height = 16;
+        let x0 = 0;
+        let x1 = x0 + length;
+        let y1 = 255;
+        let y0 = y1 - height;
+        do draw();
+        return this;
+    }
+
+    /** Disposes this DVD. */
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** Draws the DVD on the screen. */
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x0, y0, x1, y1);
+        return;
+    }
+
+    /** Erases rectangle */
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x0, y0, x1, y1);
+        return;
+    }
+
+    /** Moves the rectangle */
+    method void step(int direction) {
+
+        do erase();
+
+        if (direction = 0) {
+            let x0 = x0 + 1;
+            let x1 = x1 + 1;
+            let y0 = y0 - 1;
+            let y1 = y1 - 1;
+            do draw();
+        }
+        if (direction = 1) {
+            let x0 = x0 + 1;
+            let x1 = x1 + 1;
+            let y0 = y0 + 1;
+            let y1 = y1 + 1;
+            do draw();
+        }
+        if (direction = 2) {
+            let x0 = x0 - 1;
+            let x1 = x1 - 1;
+            let y0 = y0 + 1;
+            let y1 = y1 + 1;
+            do draw();
+        }
+        if (direction = 3) {
+            let x0 = x0 - 1;
+            let x1 = x1 - 1;
+            let y0 = y0 - 1;
+            let y1 = y1 - 1;
+            do draw();
+        }
+        return;
+    }
+
+    method int getx0() {
+        return x0;
+    }
+
+    method int gety0() {
+        return y0;
+    }
+
+    method int getx1() {
+        return x1;
+    }
+
+    method int gety1() {
+        return y1;
+    }
+
+    method int getLength() {
+        return length;
+    }
+
+    method int getHeight() {
+        return height;
+    }
+}

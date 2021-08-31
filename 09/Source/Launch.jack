@@ -1,0 +1,69 @@
+class Launch {
+
+    field int direction;
+    field Rectangle rectangle;
+
+    /** Sets the ball in motion */
+    constructor Launch new() {
+        let rectangle = Rectangle.new();
+        return this;
+    }
+
+    /** Frees up memory resources */
+    method void dispose() {
+        do ball.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** Moves the rectangle */
+    method void move(int direction) {
+        do ball.step(direction);
+        do Sys.wait(10);
+        return;
+    }
+
+    /** Runs the projectile motion animation */
+    method void run() {
+        var int x0;
+        var int x1;
+        var int y0;
+        var int y1;
+        var int length;
+        var int height;
+        let direction = 0;
+
+        while (true) {
+
+            let x0 = ball.getx0();
+            let y0 = ball.gety0();
+            let x1 = ball.getx1();
+            let y1 = ball.gety1();
+            let length = ball.getLength();
+            let height = ball.getHeight();
+            
+            if (y0 < 1) {
+                if (direction = 0) {let direction = 1;}
+                if (direction = 3) {let direction = 2;}
+            }
+
+            if (y1 > 254) {
+                if (direction = 1) {let direction = 0;}
+                if (direction = 2) {let direction = 3;}
+            }
+
+            if (x0 < 1) {
+                if (direction = 2) {let direction = 1;}
+                if (direction = 3) {let direction = 0;}
+            }
+            
+            if (x1 > 510) {
+                if (direction = 0) {let direction = 3;}
+                if (direction = 1) {let direction = 2;}
+            }
+            
+            do move(direction);
+        }
+        return;
+    }
+}
